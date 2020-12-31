@@ -1,4 +1,4 @@
-const outputConsole = document.getElementById("output");
+const outputConsole = document.getElementById("terminal-output");
 const terminalInput = document.getElementById("terminal");
 const getFormattedOutput = (ipString) => {
   let formattedOutput = "";
