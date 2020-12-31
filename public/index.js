@@ -1,4 +1,5 @@
 const outputConsole = document.getElementById("output");
+const terminalInput = document.getElementById("terminal");
 const getFormattedOutput = (ipString) => {
   let formattedOutput = "";
   for (i in ipString) {
@@ -12,7 +13,12 @@ const getFormattedOutput = (ipString) => {
   }
   return formattedOutput;
 };
-
+terminalInput.addEventListener("keyup", (e) => {
+  if (e.keyCode === 13) {
+    e.preventDefault();
+    execute();
+  }
+});
 const execute = () => {
   const cmd = document.getElementById("terminal").value;
   document.getElementById("terminal").value = "";
