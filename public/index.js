@@ -1,6 +1,21 @@
 const outputConsole = document.getElementById("output");
+const getFormattedOutput = (ipString) => {
+  let formattedOutput = "";
+  for (i in ipString) {
+    if (ipString[i] === "\n") {
+      formattedOutput = formattedOutput + "<br/>";
+    } else if (ipString[i] === " ") {
+      formattedOutput = formattedOutput + "&nbsp;";
+    } else {
+      formattedOutput = formattedOutput + ipString[i];
+    }
+  }
+  return formattedOutput;
+};
+
 const execute = () => {
   const cmd = document.getElementById("terminal").value;
+  document.getElementById("terminal").value = "";
   if (cmd) {
     fetch("http://localhost:5000/" + cmd)
       .then((res) => res.json())
@@ -13,9 +28,13 @@ const execute = () => {
           console.log(err);
         }
         if (stdout) {
-          logDiv.innerHTML = logDiv.innerHTML + stdout;
+          // console.log(String.raw`${stdout}`);
+          let formattedStdout = getFormattedOutput(stdout);
+          logDiv.innerHTML = logDiv.innerHTML + formattedStdout;
         } else {
-          logDiv.innerHTML = logDiv.innerHTML + "<error>" + stderr + "</error>";
+          let formattedStderr = getFormattedOutput(stderr);
+          logDiv.innerHTML =
+            logDiv.innerHTML + "<error>" + formattedStderr + "</error>";
         }
         outputConsole
           .appendChild(logDiv)
