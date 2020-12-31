@@ -1,0 +1,10 @@
+error {
+  color: red;
+}
+#output {
+  height: 20em;
+  background-color: black;
+  overflow: scroll;
+  color: #ffffff;
+  padding: 1em;
+}

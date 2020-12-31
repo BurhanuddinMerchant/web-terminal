@@ -13,12 +13,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.get("/:cmd", (req, res) => {
-  cp.exec(req.params.cmd, exec_options, (err, stdout, stdin) => {
+  cp.exec(req.params.cmd, exec_options, (err, stdout, stderr) => {
     console.log("#. exec");
     console.log(stdout);
-    console.log(stdin);
-    console.log(stdout);
-    res.send({ stdin, stdout, err });
+    console.log(stderr);
+    console.log(err);
+    res.send({ stderr, stdout, err });
   });
 });
 app.listen(5000, () => {
